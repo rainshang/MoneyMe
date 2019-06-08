@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "397508550545",
+    "firebase_url": "https://moneymecalculator.firebaseio.com",
+    "project_id": "moneymecalculator",
+    "storage_bucket": "moneymecalculator.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:397508550545:android:bf4fb1fca53d7398",
+        "android_client_info": {
+          "package_name": "com.xyx.moneyme"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "397508550545-ifrrsg10mu31u7qocs69su2i3ivvatse.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDhow3SXdLB79bVTgFS3ehgmjI2jPCDZ88"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "397508550545-ifrrsg10mu31u7qocs69su2i3ivvatse.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

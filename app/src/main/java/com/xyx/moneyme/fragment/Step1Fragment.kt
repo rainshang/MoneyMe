@@ -6,8 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.NavAction
-import androidx.navigation.Navigation
+import androidx.core.os.bundleOf
+import androidx.navigation.fragment.findNavController
 
 import com.xyx.moneyme.R
 import kotlinx.android.synthetic.main.fragment_step1.*
@@ -18,7 +18,6 @@ class Step1Fragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_step1, container, false)
     }
 
@@ -32,7 +31,11 @@ class Step1Fragment : Fragment() {
             setIndicatorTextFormat("\${PROGRESS} months")
         }
         calculate_btn.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.action_step1_calculate)
+            val bundle = bundleOf(
+                "value" to money_seek.progress,
+                "month" to month_seek.progress
+            )
+            findNavController().navigate(R.id.action_calculate, bundle)
         }
     }
 
