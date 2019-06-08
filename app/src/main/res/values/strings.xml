@@ -1,13 +1,31 @@
 <resources>
     <string name="app_name">Quote Calculator</string>
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="calculate_quote">Calculate Quote</string>
     <string name="moneyme">MoneyMe</string>
     <string name="dialog_section1_title">I\'m new here</string>
     <string name="dialog_section1_btn">Start Application</string>
     <string name="dialog_section2_title">I already have an account</string>
     <string name="dialog_section2_btn">Member Login</string>
-    <string name="tip_login_fail">Opps, could you please try again?</string>
+    <string name="tip_fail">Opps, could you please try again?</string>
+    <string name="step3_title">Your Quote</string>
+    <string name="your_information">Your information</string>
+    <string name="edit">Edit</string>
+    <string name="name">Name</string>
+    <string name="mobile">Mobile</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="finance_details">Finance Details</string>
+    <string name="finance_amount">Finance amount</string>
+    <string name="repayments_from">Repayments from</string>
+    <string name="apply_now">Apply Now</string>
+    <string name="nav_arg_key_amount">amount</string>
+    <string name="nav_arg_key_month">month</string>
+    <string name="fin_amount_format">$%1$d\n%2$d months</string>
+    <string name="fin_repay_format">$%1$.2f\nWeekly</string>
+    <string name="tip_success">Your Application is Successful.</string>
+    <string name="tip_invaild_email_pwd_4register">Please check the email and the password you want to use for register.
+    </string>
+    <string name="save">Save</string>
 
 </resources>

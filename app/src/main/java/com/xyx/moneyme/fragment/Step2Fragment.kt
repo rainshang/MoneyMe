@@ -12,13 +12,16 @@ import androidx.navigation.fragment.findNavController
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.IdpResponse
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
+import com.xyx.moneyme.DBKeyHelper
 import com.xyx.moneyme.R
 import kotlinx.android.synthetic.main.fragment_step2.*
 
 const val RC_SIGN_IN = 7
 
 class Step2Fragment : DialogFragment() {
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,13 +35,9 @@ class Step2Fragment : DialogFragment() {
             gotoStep3()
         }
         dialog_section2_btn.setOnClickListener {
-            val providers = arrayListOf(
-                AuthUI.IdpConfig.EmailBuilder().build()
-            )
             startActivityForResult(
                 AuthUI.getInstance()
                     .createSignInIntentBuilder()
-                    .setAvailableProviders(providers)
                     .build(),
                 RC_SIGN_IN
             )
@@ -50,17 +49,22 @@ class Step2Fragment : DialogFragment() {
         if (requestCode == RC_SIGN_IN) {
             val response = IdpResponse.fromResultIntent(data)
             if (resultCode == Activity.RESULT_OK) {
-                gotoStep3()
-//                val user = FirebaseAuth.getInstance().currentUser
-
-                // ...
+                FirebaseAuth.getInstance().currentUser
+                    ?.run {
+                        FirebaseFirestore.getInstance()
+                            .collection(DBKeyHelper.DB_NAME)
+                            .document(uid)
+                            .set(
+                                mapOf(
+                                    DBKeyHelper.KEY_EMAIL to email
+                                ),
+                                SetOptions.merge()
+                            )
+                        gotoStep3()
+                    }
             } else {
-                // Sign in failed. If response is null the user canceled the
-                // sign-in flow using the back button. Otherwise check
-                // response.getError().getErrorCode() and handle the error.
-                // ...
                 response?.run {
-                    view?.let { Snackbar.make(it, R.string.tip_login_fail, Snackbar.LENGTH_LONG).show() }
+                    view?.let { Snackbar.make(it, R.string.tip_fail, Snackbar.LENGTH_LONG).show() }
                 }
             }
         }

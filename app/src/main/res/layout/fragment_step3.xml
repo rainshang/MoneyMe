@@ -1,14 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context=".fragment.Step3Fragment">
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp"
+        tools:context=".fragment.Step3Fragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment"/>
+            android:id="@+id/step3_title"
+            android:text="@string/step3_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textSize="30sp"
+            android:textColor="@color/colorPrimary"/>
 
-</FrameLayout>
+    <TextView
+            android:id="@+id/step3_ur_info"
+            android:text="@string/your_information"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/step3_title"
+            style="@style/step3_left_label_bold"/>
+    <TextView
+            android:id="@+id/step3_ur_info_ed"
+            android:text="@string/edit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBaseline_toBaselineOf="@id/step3_ur_info"
+            style="@style/step3_right_label_bold"/>
+
+    <TextView
+            android:id="@+id/step3_name"
+            android:text="@string/name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/step3_ur_info"
+            style="@style/step3_left_label"/>
+    <EditText
+            android:id="@+id/step3_name_ev"
+            tools:text="John Doe"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/step3_name"
+            android:inputType="textPersonName"
+            style="@style/step3_right_label_editable"/>
+
+    <TextView
+            android:id="@+id/step3_mobile"
+            android:text="@string/mobile"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/step3_name_ev"
+            style="@style/step3_left_label"/>
+    <EditText
+            android:id="@+id/step3_mobile_ev"
+            tools:text="04788095252"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/step3_mobile"
+            android:inputType="phone"
+            style="@style/step3_right_label_editable"/>
+
+    <TextView
+            android:id="@+id/step3_email"
+            android:text="@string/email"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/step3_mobile_ev"
+            style="@style/step3_left_label"/>
+    <EditText
+            android:id="@+id/step3_email_ev"
+            tools:text="johndoe@test.com"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/step3_email"
+            android:inputType="textEmailAddress"
+            style="@style/step3_right_label_editable"/>
+
+    <TextView
+            android:id="@+id/step3_pwd"
+            android:text="@string/password"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/step3_email_ev"
+            style="@style/step3_left_label"/>
+    <EditText
+            android:id="@+id/step3_pwd_ev"
+            tools:text="123456"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/step3_pwd"
+            android:inputType="textPassword"
+            style="@style/step3_right_label_editable"/>
+
+    <TextView
+            android:id="@+id/step3_fin_detail"
+            android:text="@string/finance_details"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/step3_pwd_ev"
+            style="@style/step3_left_label_bold"/>
+    <TextView
+            android:id="@+id/step3_fin_detail_ed"
+            android:text="@string/edit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBaseline_toBaselineOf="@id/step3_fin_detail"
+            style="@style/step3_right_label_bold"/>
+
+    <TextView
+            android:id="@+id/step3_amount"
+            android:text="@string/finance_amount"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/step3_fin_detail_ed"
+            style="@style/step3_left_label"/>
+    <TextView
+            android:id="@+id/step3_amount_txt"
+            tools:text="$5000\nover 24 months"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/step3_amount"
+            style="@style/step3_right_label"/>
+
+    <TextView
+            android:id="@+id/step3_repay"
+            android:text="@string/repayments_from"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/step3_amount_txt"
+            style="@style/step3_left_label"/>
+    <TextView
+            android:id="@+id/step3_repay_txt"
+            tools:text="$56.15\nWeekly"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/step3_repay"
+            style="@style/step3_right_label"/>
+
+    <Button
+            android:id="@+id/step3_apply_btn"
+            android:text="@string/apply_now"
+            android:textAllCaps="false"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/step3_repay_txt"
+            android:layout_marginTop="30dp"/>
+
+    <androidx.core.widget.ContentLoadingProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="?android:attr/progressBarStyleLarge"
+            android:visibility="gone"
+            tools:visibility="visible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

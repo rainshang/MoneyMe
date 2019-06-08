@@ -23,20 +23,31 @@
             android:name="com.xyx.moneyme.fragment.Step2Fragment"
             android:label="fragment_step2"
             tools:layout="@layout/fragment_step2">
-        <argument android:name="value" app:argType="integer"/>
-        <argument android:name="month" app:argType="integer"/>
+        <argument android:name="@string/nav_arg_key_amount" app:argType="integer"/>
+        <argument android:name="@string/nav_arg_key_month" app:argType="integer"/>
         <action
                 android:id="@+id/action_start_apply"
                 app:destination="@id/step3Fragment"
-                app:popUpTo="@id/step1Fragment"/>
+                app:popUpTo="@id/step1Fragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
     </dialog>
     <fragment
             android:id="@+id/step3Fragment"
             android:name="com.xyx.moneyme.fragment.Step3Fragment"
             android:label="fragment_step3"
             tools:layout="@layout/fragment_step3">
-        <argument android:name="value" app:argType="integer"/>
-        <argument android:name="month" app:argType="integer"/>
+        <argument android:name="@string/nav_arg_key_amount" app:argType="integer"/>
+        <argument android:name="@string/nav_arg_key_month" app:argType="integer"/>
+        <action
+                android:id="@+id/action_back2step1"
+                app:popUpTo="@id/step1Fragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
     </fragment>
 
 </navigation>
