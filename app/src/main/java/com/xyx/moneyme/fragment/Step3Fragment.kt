@@ -1,6 +1,7 @@
 package com.xyx.moneyme.fragment
 
 
+import android.content.Context
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -8,6 +9,7 @@ import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -52,7 +54,18 @@ class Step3Fragment : Fragment() {
                         if (isEditing) {
                             R.string.edit
                         } else {
-                            step3_name_ev.requestFocus()
+                            step3_name_ev.run {
+                                requestFocus()
+                                setSelection(text.length)
+                                postDelayed(
+                                    {
+                                        val imm =
+                                            context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                                        imm.showSoftInput(this, 0)
+                                    },
+                                    200
+                                )
+                            }
                             R.string.save
                         }
                     )
@@ -62,13 +75,17 @@ class Step3Fragment : Fragment() {
             .currentUser
             ?.run {
                 step3_email_ev.setText(email)
+                progress_bar.show()
                 FirebaseFirestore.getInstance()
                     .collection(DBKeyHelper.DB_NAME)
                     .document(uid)
                     .get()
-                    .addOnSuccessListener {
-                        step3_name_ev.setText(it[DBKeyHelper.KEY_UNAME] as? String)
-                        step3_mobile_ev.setText(it[DBKeyHelper.KEY_PHONE] as? String)
+                    .addOnCompleteListener {
+                        progress_bar.hide()
+                        if (it.isSuccessful) {
+                            step3_name_ev.setText(it.result!![DBKeyHelper.KEY_UNAME] as? String)
+                            step3_mobile_ev.setText(it.result!![DBKeyHelper.KEY_PHONE] as? String)
+                        }
                     }
 
                 step3_pwd.visibility = View.GONE
@@ -86,6 +103,7 @@ class Step3Fragment : Fragment() {
         step3_apply_btn.setOnClickListener {
             val user = FirebaseAuth.getInstance().currentUser
             if (user != null) {
+                progress_bar.show()
                 FirebaseFirestore.getInstance()
                     .collection(DBKeyHelper.DB_NAME)
                     .document(user.uid)
@@ -97,6 +115,7 @@ class Step3Fragment : Fragment() {
                         SetOptions.merge()
                     )
                     .addOnCompleteListener {
+                        progress_bar.hide()
                         if (it.isSuccessful) {
                             onSuccess()
                         } else {
@@ -111,9 +130,11 @@ class Step3Fragment : Fragment() {
                     Patterns.EMAIL_ADDRESS.matcher(email).matches()
                     && !TextUtils.isEmpty(pwd)
                 ) {
+                    progress_bar.show()
                     FirebaseAuth.getInstance()
                         .createUserWithEmailAndPassword(email.toString(), pwd.toString())
                         .addOnCompleteListener {
+                            progress_bar.hide()
                             if (it.isSuccessful) {
                                 onSuccess()
                                 FirebaseFirestore.getInstance()
