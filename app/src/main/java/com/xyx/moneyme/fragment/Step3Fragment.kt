@@ -81,10 +81,12 @@ class Step3Fragment : Fragment() {
                     .document(uid)
                     .get()
                     .addOnCompleteListener {
-                        progress_bar.hide()
-                        if (it.isSuccessful) {
-                            step3_name_ev.setText(it.result!![DBKeyHelper.KEY_UNAME] as? String)
-                            step3_mobile_ev.setText(it.result!![DBKeyHelper.KEY_PHONE] as? String)
+                        if (isAdded) {
+                            progress_bar.hide()
+                            if (it.isSuccessful) {
+                                step3_name_ev.setText(it.result!![DBKeyHelper.KEY_UNAME] as? String)
+                                step3_mobile_ev.setText(it.result!![DBKeyHelper.KEY_PHONE] as? String)
+                            }
                         }
                     }
 
@@ -115,12 +117,14 @@ class Step3Fragment : Fragment() {
                         SetOptions.merge()
                     )
                     .addOnCompleteListener {
-                        progress_bar.hide()
-                        if (it.isSuccessful) {
-                            onSuccess()
-                        } else {
-                            onFail()
-                            Log.e(TAG, it.exception.toString())
+                        if (isAdded) {
+                            progress_bar.hide()
+                            if (it.isSuccessful) {
+                                onSuccess()
+                            } else {
+                                onFail()
+                                Log.e(TAG, it.exception.toString())
+                            }
                         }
                     }
             } else {
@@ -134,22 +138,24 @@ class Step3Fragment : Fragment() {
                     FirebaseAuth.getInstance()
                         .createUserWithEmailAndPassword(email.toString(), pwd.toString())
                         .addOnCompleteListener {
-                            progress_bar.hide()
-                            if (it.isSuccessful) {
-                                onSuccess()
-                                FirebaseFirestore.getInstance()
-                                    .collection(DBKeyHelper.DB_NAME)
-                                    .document(it.result!!.user.uid)
-                                    .set(
-                                        mapOf(
-                                            DBKeyHelper.KEY_EMAIL to email.toString(),
-                                            DBKeyHelper.KEY_UNAME to step3_name_ev.text.trim().toString(),
-                                            DBKeyHelper.KEY_PHONE to step3_mobile_ev.text.trim().toString()
+                            if (isAdded) {
+                                progress_bar.hide()
+                                if (it.isSuccessful) {
+                                    onSuccess()
+                                    FirebaseFirestore.getInstance()
+                                        .collection(DBKeyHelper.DB_NAME)
+                                        .document(it.result!!.user.uid)
+                                        .set(
+                                            mapOf(
+                                                DBKeyHelper.KEY_EMAIL to email.toString(),
+                                                DBKeyHelper.KEY_UNAME to step3_name_ev.text.trim().toString(),
+                                                DBKeyHelper.KEY_PHONE to step3_mobile_ev.text.trim().toString()
+                                            )
                                         )
-                                    )
-                            } else {
-                                onFail()
-                                Log.e(TAG, it.exception.toString())
+                                } else {
+                                    onFail()
+                                    Log.e(TAG, it.exception.toString())
+                                }
                             }
                         }
                 } else {
